@@ -2,7 +2,7 @@ import 'package:conecta_parana/core/config/environment.dart';
 import 'package:flutter/material.dart';
 
 class PlaceholderScreen extends StatelessWidget {
-  const PlaceholderScreen();
+  const PlaceholderScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class PlaceholderScreen extends StatelessWidget {
 
             const SizedBox(height: 12),
             Text('Ambiente: ${Environment.name}',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
 
             const SizedBox(height: 8),
