@@ -3,29 +3,16 @@ enum Flavor { dev, prod }
 class Environment {
   Environment._();
 
-  static late final Flavor flavor;
+  static late Flavor flavor;
+  static const _apiBaseUrl = String.fromEnvironment('API_BASE_URL');
 
   static void initialize(Flavor f) {
     flavor = f;
+
+    assert(apiBaseUrl.isNotEmpty, '[ERRO]: URL não definida nas configurações de ambiente');
   }
 
-  static String get apiBaseUrl {
-    switch (flavor) {
-      case Flavor.dev:
-        return 'https://api-staging.conectaparana.com.br';
-      case Flavor.prod:
-        return 'https://api.conectaparana.com.br';
-    }
-  }
-
-  static String get name {
-    switch (flavor) {
-      case Flavor.dev:
-        return 'DEV';
-      case Flavor.prod:
-        return 'PROD';
-    }
-  }
-
+  static String get apiBaseUrl => _apiBaseUrl;
+  static String get name => flavor.name.toUpperCase();
   static bool get isDev => flavor == Flavor.dev;
 }
