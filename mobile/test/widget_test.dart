@@ -1,30 +1,38 @@
-// This is a basic Flutter widget test.
+// Este é um teste básico de widget Flutter.
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// Para interagir com um widget em seu teste, use o utilitário WidgetTester
+// do pacote flutter_test. Por exemplo, você pode enviar gestos de toque e
+// rolagem. Você também pode usar WidgetTester para encontrar widgets filhos
+// na árvore de widgets, ler texto e verificar que os valores das propriedades
+// do widget estão corretos.
 
 import 'package:flutter/material.dart';
+import 'package:conecta_parana/core/config/environment.dart';
+import 'package:conecta_parana/src/presentation/widgets/placeholder_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:conecta_parana/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Tela placeholder exibe nome do app e ambiente.', (WidgetTester tester) async {
+    // 1. Inicia o app em ambiente de desenvolvimento.
+    Environment.initialize(Flavor.dev);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // 2. Constrói nosso app e dispara um frame.
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: PlaceholderScreen(),
+      ),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // 3. Verifica se o nosso header e título estão na tela, perceba que o Matcher chamado é findsWidgets, isso significa
+    // que pode existir mais de um texto igual.
+    expect(find.text('Conecta Paraná'), findsWidgets);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // 3.1. Verifica se o Ambiente e a Url da API de desenvolvimento estão na tela.
+    expect(find.text('Ambiente: DEV'), findsOneWidget);
+    expect(find.text(Environment.apiBaseUrl), findsOneWidget);
+
+    // Exemplos de utilização do WidgetTester:
+    // await tester.tap(find.byIcon(Icons.add));
+    // await tester.pump();
   });
 }
