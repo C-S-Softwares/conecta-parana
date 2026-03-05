@@ -2,8 +2,8 @@ import 'package:conectaparana/core/config/environment.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const stagingUrl = 'https://api-staging.conectaparana.com.br';
-  const prodUrl = 'https://api.conectaparana.com.br';
+  const stagingUrl = 'https://api-staging.exemplo.com.br';
+  const prodUrl = 'https://api.exemplo.com.br';
   
   group('Environment', () {
     test('URL da api injetada corretamente.', () {

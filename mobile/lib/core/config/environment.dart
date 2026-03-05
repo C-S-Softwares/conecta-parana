@@ -8,11 +8,17 @@ class Environment {
 
   static void initialize(Flavor f) {
     flavor = f;
-
-    assert(apiBaseUrl.isNotEmpty, '[ERRO]: URL não definida nas configurações de ambiente');
   }
 
-  static String get apiBaseUrl => _apiBaseUrl;
+  static String get apiBaseUrl {
+    if (_apiBaseUrl.isNotEmpty) return _apiBaseUrl;
+
+    const stagingUrl = 'https://api-staging.exemplo.com.br';
+    const prodUrl = 'https://api.exemplo.com.br';
+
+    return isDev ? stagingUrl : prodUrl;
+  }
+
   static String get name => flavor.name.toUpperCase();
   static bool get isDev => flavor == Flavor.dev;
 }
