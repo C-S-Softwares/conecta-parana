@@ -1,5 +1,5 @@
-import 'package:conecta_parana/core/app_theme.dart';
-import 'package:conecta_parana/src/presentation/widgets/placeholder_screen.dart';
+import 'package:conectaparana/core/theme/app_theme.dart';
+import 'package:conectaparana/shared/widgets/placeholder_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

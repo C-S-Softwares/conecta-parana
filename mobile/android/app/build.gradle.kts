@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.conecta_parana"
+    namespace = "com.conectaparana"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,7 +20,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.conecta_parana"
+        applicationId = "com.conectaparana"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

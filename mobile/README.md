@@ -1,4 +1,4 @@
-# conecta_parana
+# conectaparana
 
 A new Flutter project.
 

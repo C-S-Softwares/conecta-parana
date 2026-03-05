@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "ConectaPR (dev)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_dev.dart",
+      "args": ["--flavor", "dev", "--dart-define-from-file", ".config_dev.json"]
+    },
+    {
+      "name": "ConectaPR (prod)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "lib/main_prod.dart",
+      "args": ["--flavor", "prod", "--dart-define-from-file", ".config_prod.json"]
+    },
+    {
+      "name": "ConectaPR (tests)",
+      "request": "launch",
+      "type": "dart",
+      "codeLens": {
+        "for": ["run-test", "run-test-file", "debug-test", "debug-test-file"]
+      },
+      "args": ["--dart-define-from-file", ".config_dev.json"]
+    }
+  ]
+}

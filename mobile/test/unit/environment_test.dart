@@ -1,4 +1,4 @@
-import 'package:conecta_parana/core/config/environment.dart';
+import 'package:conectaparana/core/config/environment.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

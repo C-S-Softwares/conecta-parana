@@ -1,4 +1,4 @@
-import 'package:conecta_parana/core/config/environment.dart';
+import 'package:conectaparana/core/config/environment.dart';
 import 'package:flutter/material.dart';
 
 class PlaceholderScreen extends StatelessWidget {

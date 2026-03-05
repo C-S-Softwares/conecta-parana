@@ -1,4 +1,4 @@
-package com.conecta_parana
+package com.conectaparana
 
 import io.flutter.embedding.android.FlutterActivity
 

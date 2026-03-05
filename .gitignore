@@ -1,3 +1,6 @@
 # Environment variables related
 .env*
 !*.example*
+
+# Intellij / Android Studio
+.idea/

@@ -1,5 +1,5 @@
 # Nome e descrição do projeto.
-name: conecta_parana
+name: conectaparana
 description: "Plataforma multi-cidade para o estado do Paraná"
 # Esta linha impede que o pacote seja publicado acidentalmente em pub.dev
 publish_to: 'none'

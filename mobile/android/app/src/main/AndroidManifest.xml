@@ -4,7 +4,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name="com.conecta_parana.MainActivity"
+            android:name="com.conectaparana.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity=""

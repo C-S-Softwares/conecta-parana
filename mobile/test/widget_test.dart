@@ -7,8 +7,8 @@
 // do widget estão corretos.
 
 import 'package:flutter/material.dart';
-import 'package:conecta_parana/core/config/environment.dart';
-import 'package:conecta_parana/src/presentation/widgets/placeholder_screen.dart';
+import 'package:conectaparana/core/config/environment.dart';
+import 'package:conectaparana/shared/widgets/placeholder_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

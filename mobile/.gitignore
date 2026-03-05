@@ -35,7 +35,6 @@ output.json
 
 # IntelliJ
 *.iml
-.idea/
 misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
@@ -214,7 +213,14 @@ obj/
 *.iws
 /out/
 
-# User-specific configurations
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ IDEA / Android Studio
 .idea/caches/
 .idea/libraries/
 .idea/shelf/
@@ -222,12 +228,12 @@ obj/
 .idea/tasks.xml
 .idea/.name
 .idea/compiler.xml
-.idea/copyright/profiles_settings.xml
+.idea/copyright/
 .idea/encodings.xml
 .idea/misc.xml
 .idea/modules.xml
-.idea/scopes/scope_settings.xml
-.idea/dictionaries
+.idea/scopes/
+.idea/dictionaries/
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 .idea/datasources.xml
@@ -239,6 +245,15 @@ obj/
 .idea/gradle.xml
 .idea/jarRepositories.xml
 .idea/navEditor.xml
+.idea/mongoSettings.xml
+.idea/deploymentTargetSelector.xml
+.idea/deviceManager.xml
+.idea/kotlinc.xml
+.idea/markdown.xml
+.idea/migrations.xml
+.idea/AndroidProjectSystem.xml
+!.idea/runConfigurations/
+!.idea/runConfigurations.xml
 
 # Legacy Eclipse project files
 .classpath
