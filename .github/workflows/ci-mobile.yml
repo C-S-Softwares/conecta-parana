@@ -1,11 +1,6 @@
 name: CI Mobile
 
 on:
-  push:
-    branches-ignore:
-      - main
-    paths:
-      - "mobile/**"
   pull_request:
     branches:
       - main

@@ -1,11 +1,6 @@
 name: CI Admin
 
 on:
-  push:
-    branches-ignore:
-      - main
-    paths:
-      - "admin/**"
   pull_request:
     branches:
       - main
