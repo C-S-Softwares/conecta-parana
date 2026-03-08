@@ -1,0 +1,182 @@
+# Guia de Setup para Desenvolvedores
+
+Passo a passo para rodar o Conecta Paraná localmente. Se travar em algum ponto, peça ajuda ao time, alguém estará disponível para auxiliar.
+
+## Pré-requisitos
+
+| Ferramenta | Versão mínima |
+|---|---|
+| Node.js | 20 |
+| npm | 10+ |
+| Flutter | 3.11+ |
+| Docker e Docker Compose | Última stable |
+| Angular CLI | 21+ (`npm i -g @angular/cli`) |
+| Android Studio | Última stable (para o mobile) |
+
+## 1. Clonar o repositório
+
+```bash
+# Via SSH
+git clone git@github.com:c-s-softwares/conecta-parana.git
+
+# Via HTTPS
+git clone https://github.com/c-s-softwares/conecta-parana.git
+
+# Navegar até o repositório
+cd conecta-parana
+```
+
+## 2. Configurar variáveis de ambiente
+
+### Raiz do projeto
+
+```bash
+cp .env.example .env
+```
+
+Preencha os valores:
+
+```env
+DB_USER=usuario
+DB_PASSWORD=senha
+DB_NAME=banco
+```
+
+### Backend
+
+```bash
+cp backend/.env.example backend/.env
+```
+
+Ajuste o `DATABASE_URL` para bater com o `.env` da raiz:
+
+```env
+# Exemplo
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/banco?schema=public
+PORT=3000
+NODE_ENV=development
+```
+
+### Mobile
+
+```bash
+cp mobile/.config_dev.example.json mobile/.config_dev.json
+```
+
+Para desenvolvimento local apontando ao backend via emulador Android:
+
+```json
+{
+  "API_BASE_URL": "http://10.0.2.2:3000"
+}
+```
+
+> `10.0.2.2` é o alias do emulador Android para `localhost` da máquina host.
+
+## 3. Subir os serviços com Docker
+
+```bash
+docker-compose up -d
+
+# Isso sobe: banco de dados (PostgreSQL + PostGIS),
+# backend (com hot reload) e admin (com hot reload)
+
+# Você pode subir separadamente (ou subir apenas o 
+# serviço desejado) utilizando os comandos a seguir
+
+docker compose up db -d
+docker compose up backend -d
+docker compose up admin -d
+```
+
+
+
+Verifique se tudo está rodando:
+
+```bash
+docker-compose ps
+```
+
+## 4. Rodar migrations do Prisma
+
+```bash
+cd backend
+npm install
+npx prisma migrate dev
+cd ..
+```
+
+## 5. Rodar o backend (isolado, sem Docker)
+
+Se preferir rodar o backend fora do Docker (ex: para debug):
+
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+
+Acesse a documentação Swagger em: `http://localhost:3000/api/docs`
+
+## 6. Rodar o admin (isolado, sem Docker)
+
+```bash
+cd admin
+npm install
+npm start
+```
+
+Acesse em: `http://localhost:4200`
+
+## 7. Rodar o app mobile
+
+### Setup no Android Studio
+
+Peça ajuda para fazer o setup do Android Studio com mais exatidão no passo 4/5.
+
+1. Abra o Android Studio
+2. **File → Open** e selecione a pasta `mobile/`
+3. Aguarde o Flutter SDK ser detectado e as dependências resolvidas
+4. Configure um emulador: **Tools → Device Manager → Create Virtual Device** — escolha um Pixel e uma imagem com API 33+
+5. Selecione o flavor `dev` na configuração de run (ou rode pelo terminal abaixo)
+6. Clique em **Run**
+
+### Via CLI
+
+```bash
+cd mobile
+flutter pub get
+flutter run --flavor dev -t lib/main_dev.dart --dart-define=API_BASE_URL=http://10.0.2.2:3000
+```
+
+> Use **apenas o flavor `dev`** para desenvolvimento. O flavor `prod` existe somente para geração do pacote final de produção.
+
+## 8. Rodar testes
+
+### Backend
+
+```bash
+cd backend
+npm run test              # Testes unitários
+npm run test:e2e          # Testes E2E (requer banco rodando)
+npm run test:mutation     # Testes de mutação (Stryker)
+```
+
+### Admin
+
+```bash
+cd admin
+npm run test              # Testes unitários
+npm run e2e               # Testes E2E (Playwright)
+npm run test:mutation     # Testes de mutação (Stryker)
+```
+
+### Mobile
+
+```bash
+cd mobile
+flutter test                       # Testes unitários
+flutter test integration_test/     # Testes de integração
+```
+
+Você também pode rodar os testes direto pela IDE caso esteja disponível.
