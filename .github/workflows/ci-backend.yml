@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Generate Prisma Cliente
-        run: npm prisma:generate
+        run: npx prisma generate
 
       - name: Lint
         run: npm run lint
@@ -57,7 +57,7 @@ jobs:
         run: npm ci
       
       - name: Generate Prisma Cliente
-        run: npm prisma:generate
+        run: npx prisma generate
 
       - name: Test
         run: npm run test -- --coverage
