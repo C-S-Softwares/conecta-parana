@@ -1,6 +1,6 @@
 {
-    "name": "mobile",
-    "short_name": "mobile",
+    "name": "conectaparana",
+    "short_name": "conectaparana",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
