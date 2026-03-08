@@ -1,6 +1,8 @@
 services:
   db:
-    image: postgis/postgis:16-3.5
+    build:
+      context: ./infra
+      dockerfile: Dockerfile.postgis
     container_name: conecta_db
     ports:
       - "5432:5432"

@@ -1,7 +1,6 @@
 services:
   db:
-    image: postgis/postgis:16-3.5
-    platform: linux/arm64
+    image: ghcr.io/${GITHUB_ORG}/conecta-parana-db:latest
     container_name: conecta_db_prod
     restart: always
     environment:
