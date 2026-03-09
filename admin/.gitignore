@@ -43,7 +43,12 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
-# Tests
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
 
-playwright-report/
-test-results/
+# Stryker
+/reports/
+/.stryker-tmp/
