@@ -7,19 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
+    "test:mutation": "stryker run",
+    "e2e": "playwright test --config e2e/playwright.config.ts",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix",
+    "format": "npx prettier --write \"src/**/*.{ts,html,css,json}\""
   },
   "private": true,
   "packageManager": "npm@11.8.0",
@@ -38,7 +30,11 @@
     "@angular/cli": "^21.1.5",
     "@angular/compiler-cli": "^21.1.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
+    "@stryker-mutator/core": "^9.6.0",
+    "@stryker-mutator/typescript-checker": "^9.6.0",
     "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^25.3.5",
     "@vitest/coverage-v8": "^4.0.18",
     "angular-eslint": "21.3.0",
     "eslint": "^10.0.2",
