@@ -38,14 +38,14 @@ Trigger: PR → main (paths: `mobile/**`)
 
 ### deploy-staging.yml — Deploy manual
 
-Trigger: **workflow_dispatch** (manual) com seleção de target: `backend`, `admin`, `mobile` ou `all`.
+Trigger: **workflow_dispatch** (manual) com seleção de target: `backend`, `admin`, `mobile` ou `todas`.
 
 | Job | O que faz | Condição |
 |---|---|---|
-| **deploy-db** | Build da imagem PostGIS (arm64), push para GHCR com tag `:staging`, deploy via SSH | target = backend ou all |
-| **deploy-backend** | Build do backend (arm64), push GHCR, deploy SSH + roda `prisma migrate deploy` | target = backend ou all (depende de deploy-db) |
-| **deploy-admin** | Build do admin (arm64) com `ENVIRONMENT=staging`, push GHCR, deploy SSH | target = admin ou all |
-| **build-mobile** | Build APK flavor `dev` apontando para `api-staging.conectaparana.com.br`, cria GitHub pre-release | target = mobile ou all |
+| **deploy-db** | Build da imagem PostGIS (arm64), push para GHCR com tag `:staging`, deploy via SSH | target = backend ou todas |
+| **deploy-backend** | Build do backend (arm64), push GHCR, deploy SSH + roda `prisma migrate deploy` | target = backend ou todas (depende de deploy-db) |
+| **deploy-admin** | Build do admin (arm64) com `ENVIRONMENT=staging`, push GHCR, deploy SSH | target = admin ou todas |
+| **build-mobile** | Build APK flavor `dev` apontando para `api-staging.conectaparana.com.br`, cria GitHub pre-release | target = mobile ou todas |
 
 ### deploy-production.yml — Deploy automático
 
@@ -63,7 +63,7 @@ Trigger: **push na branch `main`** (ou seja, ao mergear um PR).
 1. Acesse o repositório no GitHub
 2. Vá em **Actions** → **Deploy Staging** (menu lateral esquerdo)
 3. Clique em **Run workflow**
-4. Selecione o target desejado (`backend`, `admin`, `mobile` ou `all`)
+4. Selecione o target desejado (`backend`, `admin`, `mobile` ou `todas`)
 5. Clique em **Run workflow** (botão verde)
 6. Acompanhe o progresso na lista de runs
 
