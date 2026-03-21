@@ -6,11 +6,11 @@ import helmet from 'helmet';
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
 
-  app.use(helmet());
+  app.use(helmet() as never);
 
   app.enableCors({
     origin: process.env.CORS_ORIGIN,
-  })
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Conecta Paraná API')

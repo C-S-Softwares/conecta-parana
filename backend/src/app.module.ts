@@ -18,18 +18,22 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
     }),
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        throttlers: [
-          {
-            ttl: config.get<number>('THROTTLE_TTL')!,
-            limit: config.get<number>('THROTTLE_LIMIT')!,
-          },
-        ],
-      }),
+      useFactory: (config: ConfigService) => [
+        {
+          ttl: config.get<number>('THROTTLE_TTL') ?? 60,
+          limit: config.get<number>('THROTTLE_LIMIT') ?? 10,
+        },
+      ],
     }),
     PrismaModule,
   ],
   controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD as string,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
