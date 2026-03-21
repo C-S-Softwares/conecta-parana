@@ -18,16 +18,38 @@ model HealthCheck {
   @@map("health_checks")
 }
 
-model user {
+model User {
   id_user Int @id @default(autoincrement())
   name String 
   email String @unique 
   password String
   role Role @default(USUARIO)
   id_city Int 
+
+  city City @relation(fields: [id_city], references: [id_city])
+  Refresh_tokens Refresh_token[]
 }
 
 enum Role {
   ADMIN
   USUARIO
+}
+
+
+model Refresh_token {
+  id_refresh_token Int @id @default(autoincrement())
+  token String
+  expires_at DateTime
+  user_id Int
+
+  user User @relation(fields: [user_id], references: [id_user])
+}
+
+
+model City {
+  id_city Int @id @default(autoincrement())
+  nome String
+  state String
+
+  users User[]
 }
