@@ -1,30 +1,23 @@
 import { Global, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
-import { redisStore } from 'cache-manager-redis-yet';
+import { createKeyv } from '@keyv/redis';
 
 @Global()
 @Module({
   imports: [
     CacheModule.registerAsync({
+      isGlobal: true,
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => {
+      useFactory: (configService: ConfigService) => {
         const redisUrl = configService.get<string>(
           'REDIS_URL',
           'redis://localhost:6379',
         );
-        const url = new URL(redisUrl);
-
-        const store = await redisStore({
-          socket: {
-            host: url.hostname,
-            port: Number(url.port) || 6379,
-          },
-          ttl: 30_000, // TTL padrão: 30 segundos (em ms)
-        });
 
         return {
-          store: store as unknown as CacheStorage,
+          stores: [createKeyv(redisUrl)],
+          ttl: 30_000, // TTL padrão: 30 segundos (em ms)
         };
       },
     }),
