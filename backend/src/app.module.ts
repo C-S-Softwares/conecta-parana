@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './config/prisma.module';
 import { envValidationSchema } from './config/env.validation';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -14,9 +16,24 @@ import { envValidationSchema } from './config/env.validation';
         abortEarly: true,
       },
     }),
+    ThrottlerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => [
+        {
+          ttl: config.get<number>('THROTTLE_TTL') ?? 60000,
+          limit: config.get<number>('THROTTLE_LIMIT') ?? 100,
+        },
+      ],
+    }),
     PrismaModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD as string,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}

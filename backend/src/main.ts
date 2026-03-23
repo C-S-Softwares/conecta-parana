@@ -1,7 +1,11 @@
+import { NestExpressApplication } from '@nestjs/platform-express';
 import * as Sentry from '@sentry/node';
 import { NestFactory, HttpAdapterHost } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { ForbiddenException } from '@nestjs/common';
 import { SentryExceptionFilter } from './common/sentry-exception.filter';
 
 const glitchtipDsn = process.env.GLITCHTIP_DSN;
@@ -15,7 +19,29 @@ if (glitchtipDsn) {
 }
 
 async function bootstrap(): Promise<void> {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.use(helmet());
+
+  const configService = app.get(ConfigService);
+  const allowedOrigins =
+    configService
+      .get<string>('CORS_ORIGIN')
+      ?.split(',')
+      .map((origin) => origin.trim()) ?? [];
+
+  app.enableCors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(
+          new ForbiddenException(`Origin ${origin} not allowed by CORS`),
+          false,
+        );
+      }
+    },
+  });
 
   // Filter global de exceções enviadas para o GlitchTip
   const { httpAdapter } = app.get(HttpAdapterHost);
@@ -30,7 +56,7 @@ async function bootstrap(): Promise<void> {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  const port = process.env.PORT ?? 3000;
+  const port = configService.get<number>('PORT') ?? 3000;
   await app.listen(port);
 }
 
