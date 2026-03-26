@@ -28,7 +28,6 @@ import { AuthModule } from './modules/auth/auth.module';
     }),
     PrismaModule,
     AuthModule,
-
   ],
   controllers: [AppController],
   providers: [
