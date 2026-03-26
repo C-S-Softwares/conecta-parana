@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { PrismaModule } from './config/prisma.module';
 import { envValidationSchema } from './config/env.validation';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,8 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
       ],
     }),
     PrismaModule,
+    AuthModule,
+
   ],
   controllers: [AppController],
   providers: [
