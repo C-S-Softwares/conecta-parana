@@ -11,4 +11,5 @@ export const envValidationSchema = Joi.object({
   CORS_ORIGIN: Joi.string().required(),
   REDIS_URL: Joi.string().uri().default('redis://localhost:6379'),
   GLITCHTIP_DSN: Joi.string().uri().allow('').default(''),
+  JWT_SECRET: Joi.string().required(),
 });

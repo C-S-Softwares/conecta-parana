@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Reflector } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -12,10 +14,17 @@ describe('AppController', () => {
       controllers: [AppController],
       providers: [
         AppService,
+        Reflector,
         {
           provide: ConfigService,
           useValue: {
             get: jest.fn().mockReturnValue('test'),
+          },
+        },
+        {
+          provide: JwtService,
+          useValue: {
+            verifyAsync: jest.fn(),
           },
         },
         {
@@ -38,6 +47,15 @@ describe('AppController', () => {
       expect(result).toHaveProperty('status', 'ok');
       expect(result).toHaveProperty('timestamp');
       expect(result).toHaveProperty('environment', 'test');
+    });
+  });
+
+  describe('getAdminTest', () => {
+    it('should return admin access message', () => {
+      // Guards são testados separadamente (roles.guard.spec.ts / jwt-auth.guard.spec.ts)
+      // Aqui testamos apenas a lógica do método do controller
+      const result = appController.getAdminTest();
+      expect(result).toEqual({ message: 'Acesso admin autorizado com sucesso' });
     });
   });
 });
