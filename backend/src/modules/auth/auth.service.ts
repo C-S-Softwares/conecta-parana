@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../../config/prisma.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -87,10 +87,7 @@ export class AuthService {
   private async generateTokens(userId: number, email: string, role: string) {
     const payload = { sub: userId, email, role };
 
-    const accessToken = this.jwt.sign(payload, {
-      secret: this.config.get<string>('JWT_SECRET'),
-      expiresIn: '15m',
-    });
+    const accessToken = this.jwt.sign(payload);
 
     const refreshToken = this.jwt.sign(payload, {
       secret: this.config.get<string>('JWT_REFRESH_SECRET'),
