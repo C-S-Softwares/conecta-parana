@@ -62,20 +62,14 @@ describe('SentryExceptionFilter', () => {
   });
 
   it('não deve reportar ao Sentry com erro 400', () => {
-    const exception = new HttpException(
-      'Bad Request',
-      HttpStatus.BAD_REQUEST,
-    );
+    const exception = new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     filter.catch(exception, mockHost);
 
     expect(Sentry.captureException).not.toHaveBeenCalled();
   });
 
   it('não deve reportar ao Sentry com erro 404', () => {
-    const exception = new HttpException(
-      'Not Found',
-      HttpStatus.NOT_FOUND,
-    );
+    const exception = new HttpException('Not Found', HttpStatus.NOT_FOUND);
     filter.catch(exception, mockHost);
 
     expect(Sentry.captureException).not.toHaveBeenCalled();
@@ -90,7 +84,10 @@ describe('SentryExceptionFilter', () => {
 
   it('deve sempre chamar super.catch independentemente do tipo de erro', () => {
     const error400 = new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-    const error500 = new HttpException('Server Error', HttpStatus.INTERNAL_SERVER_ERROR);
+    const error500 = new HttpException(
+      'Server Error',
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
     const errorGeneric = new Error('crash');
 
     filter.catch(error400, mockHost);
@@ -116,10 +113,7 @@ describe('SentryExceptionFilter', () => {
   });
 
   it('não deve logar quando não reportar ao Sentry', () => {
-    const exception = new HttpException(
-      'Bad Request',
-      HttpStatus.BAD_REQUEST,
-    );
+    const exception = new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
     filter.catch(exception, mockHost);
 
     expect(loggerErrorSpy).not.toHaveBeenCalled();
