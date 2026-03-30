@@ -28,6 +28,7 @@ import { AdminModule } from './modules/admin/admin.module';
         },
       ],
     }),
+    PinoLoggerModule,
     PrismaModule,
     AuthModule,
     AdminModule,
