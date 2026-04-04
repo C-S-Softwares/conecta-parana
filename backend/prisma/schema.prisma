@@ -43,6 +43,7 @@ model User {
   photos Photo[]
   likes Like[]
   favorites Favorite[]
+  notifications Notification[]
 
   @@map("users")
 }
@@ -80,6 +81,7 @@ model Event{
   photos Photo[]
   likes Like[]
   favorites Favorite[]
+  notifications Notification[]
 
   @@map("events")
 }
@@ -122,6 +124,20 @@ model Favorite {
   @@map("favorites")
 }
 
+model Notification {
+  id Int @id @default(autoincrement())
+  title String
+  description String
+  isRead Boolean @map("is_read")
+
+  userId Int @map("user_id")
+  eventId Int? @map("event_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event? @relation(fields: [eventId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("notifications")
+}
 
 
 
