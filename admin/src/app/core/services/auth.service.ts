@@ -12,7 +12,7 @@ export interface AuthUser {
 export class AuthService {
   private readonly TOKEN_KEY = 'auth_token';
 
-  login(email: string, _password: string): Observable<AuthUser> {
+  login(email: string): Observable<AuthUser> {
     console.log('[AuthService] login:', email);
     return of({ id: 1, name: 'Admin', email, token: 'mock-token-123' });
   }

@@ -53,7 +53,7 @@ export class LoginPage {
 
     const { email, password, rememberMe } = this.form.getRawValue();
 
-    this.auth.login(email, password).subscribe((user) => {
+    this.auth.login(email).subscribe((user) => {
       if (rememberMe) this.auth.saveToken(user.token);
       this.router.navigate(['/']);
     });
