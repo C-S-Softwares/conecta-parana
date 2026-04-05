@@ -89,7 +89,7 @@ describe('LoginPage', () => {
       });
       component.onSubmit();
 
-      expect(spy).toHaveBeenCalledWith('test@test.com', '12345678');
+      expect(spy).toHaveBeenCalledWith('test@test.com');
     });
 
     it('deve salvar token quando rememberMe for true', () => {
