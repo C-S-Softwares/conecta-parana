@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { FormField } from '../../shared/components/form-field';
 import { FormContainer } from '../../shared/components/form-container';
 import { AuthService } from '../../core/services/auth.service';
-import { LoginForm } from './login.model';
 
 @Component({
   selector: 'app-login-page',
