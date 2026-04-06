@@ -14,6 +14,11 @@ export const routes: Routes = [
       },
       {
       
+        path: 'notifications',
+        loadChildren: () =>
+          import('./features/notification/notification.routes').then((m) => m.NOTIFICATION_ROUTES),
+      },
+      {
         path: 'events',
         loadChildren: () =>
           import('./features/events/events.routes').then((m) => m.EVENTS_ROUTES),
