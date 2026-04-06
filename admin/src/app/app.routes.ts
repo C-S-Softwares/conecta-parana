@@ -13,6 +13,12 @@ export const routes: Routes = [
           import('./features/news/news.routes').then((m) => m.NEWS_ROUTES),
       },
       {
+      
+        path: 'events',
+        loadChildren: () =>
+          import('./features/events/events.routes').then((m) => m.EVENTS_ROUTES),
+      },
+      {
         path: 'posts',
         loadChildren: () =>
           import('./features/posts/posts.routes').then((m) => m.POSTS_ROUTES),
