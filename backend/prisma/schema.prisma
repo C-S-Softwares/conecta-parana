@@ -19,26 +19,34 @@ model HealthCheck {
 }
 
 model City {
-  id Int @id @default(autoincrement())
-  name String
+  id    Int    @id @default(autoincrement())
+  name  String
   state String
 
-  users User[]
+  users  User[]
+  news   News[]
+  locals Local[]
+
   @@map("cities")
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String 
-  email String @unique 
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
   password String
-  role Role @default(USUARIO)
-  cityId Int? @map("city_id") 
+  role     Role   @default(USUARIO)
+  cityId   Int?   @map("city_id")
 
-  city City? @relation(fields: [cityId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  city           City?          @relation(fields: [cityId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   refresh_tokens RefreshToken[]
+  suggestions    Suggestion[]
+  locals         Local[]
+
   @@map("users")
 }
+
+
 
 enum Role {
   ADMIN
@@ -53,4 +61,65 @@ model RefreshToken {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade )
   @@map("refresh_tokens")
+}
+model News {
+  id          Int     @id @default(autoincrement()) @map("news_id")
+  title       String
+  description String
+  type        String
+  linkType    String  @map("link_type")
+  isActive    Boolean @map("is_active")
+  cityId      Int     @map("city_id")
+
+  city City @relation(fields: [cityId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("news")
+}
+
+model Post {
+  id          Int     @id @default(autoincrement()) @map("post_id")
+  title       String
+  description String
+  isActive    Boolean @map("is_active")
+
+  @@map("posts")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement()) @map("category_id")
+  name String
+  icon String
+
+  locals Local[]
+
+  @@map("categories")
+}
+
+model Local {
+  id              Int    @id @default(autoincrement()) @map("local_id")
+  name            String
+  description     String
+  address         String
+  phone           String
+  cityId          Int    @map("city_id")
+  categoryId      Int    @map("category_id")
+  createdByUserId Int    @map("created_by_user_id")
+
+  city          City     @relation(fields: [cityId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  category      Category @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUser User     @relation(fields: [createdByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("locals")
+}
+
+model Suggestion {
+  id      Int    @id @default(autoincrement()) @map("suggestion_id")
+  subject String
+  message String
+  status  String
+  userId  Int    @map("user_id")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("suggestions")
 }
