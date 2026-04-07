@@ -18,6 +18,7 @@ export const routes: Routes = [
           import('./features/news/news.routes').then((m) => m.NEWS_ROUTES),
       },
       {
+      
         path: 'notifications',
         loadChildren: () =>
           import('./features/notification/notification.routes').then((m) => m.NOTIFICATION_ROUTES),
@@ -27,6 +28,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/events/events.routes').then((m) => m.EVENTS_ROUTES),
       },
+      {
+        path: 'posts',
+        loadChildren: () =>
+          import('./features/posts/posts.routes').then((m) => m.POSTS_ROUTES),
+      }
     ],
   },
   { path: '**', redirectTo: 'login' },
