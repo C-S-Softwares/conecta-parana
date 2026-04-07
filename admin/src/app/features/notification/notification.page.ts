@@ -24,7 +24,7 @@ const STORAGE_KEY = 'notifications';
 export class NotificationComponent extends CrudPage<NotificationFormValues> implements OnInit {
 
   private readonly fb = inject(FormBuilder);
-  private editingId = signal<string | null>(null);
+  override readonly editingId = signal<string | number | null>(null);
 
   protected readonly form = this.fb.nonNullable.group({
     title: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
@@ -118,7 +118,7 @@ export class NotificationComponent extends CrudPage<NotificationFormValues> impl
     const id = this.editingId();
 
     if (id) {
-      this.update(id, values);
+      this.update(id as string, values);
     } else {
       this.create(values);
     }
