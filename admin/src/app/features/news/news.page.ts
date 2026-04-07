@@ -162,6 +162,9 @@ export class NewsPage extends CrudPage<NewsForm> {
         list.map((n) => (n.id === id ? { ...n, ...raw } : n))
       );
     } else {
+      this.api.create('news', raw).subscribe(() => {
+        this.view.set('list');
+      })
       const newItem: NewsItem = { ...raw, id: Date.now() };
       this.items.update((list) => [...list, newItem]);
     }
