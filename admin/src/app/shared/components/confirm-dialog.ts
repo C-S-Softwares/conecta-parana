@@ -9,6 +9,6 @@ export class ConfirmDialog {
   visible = input.required<boolean>();
   title = input<string>('Confirmar exclusão');
   message = input<string>('Tem certeza que deseja excluir este item?');
-  confirm = output<void>();
-  cancel = output<void>();
+  confirmed = output<void>();
+  cancelled = output<void>();
 }

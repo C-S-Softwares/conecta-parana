@@ -20,8 +20,8 @@
   <app-entity-list
     [items]="items()"
     [rowTemplate]="newsRow"
-    (edit)="openEditForm($event)"
-    (delete)="confirmDelete($event)"
+    (edit)="openEditForm($any($event))"
+    (delete)="confirmDelete($any($event))"
   />
 } @else {
   <app-form-container [title]="isEditing ? 'EDITAR NOTÍCIA' : 'CRIAR NOTÍCIA'">
@@ -139,6 +139,6 @@
   [visible]="!!deletingItem()"
   title="Excluir notícia"
   message="Tem certeza que deseja excluir esta notícia? Esta ação não pode ser desfeita."
-  (confirm)="executeDelete()"
-  (cancel)="cancelDelete()"
+  (confirmed)="executeDelete()"
+  (cancelled)="cancelDelete()"
 />

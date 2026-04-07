@@ -12,10 +12,10 @@ import { HERO_ICONS } from '../icons/hero-icons';
 export class EntityList {
   private readonly sanitizer = inject(DomSanitizer);
 
-  items = input.required<any[]>();
-  rowTemplate = input.required<TemplateRef<any>>();
-  edit = output<any>();
-  delete = output<any>();
+  items = input.required<unknown[]>();
+  rowTemplate = input.required<TemplateRef<unknown>>();
+  edit = output<unknown>();
+  delete = output<unknown>();
 
   get editIcon(): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(HERO_ICONS['pencilSquare']);
