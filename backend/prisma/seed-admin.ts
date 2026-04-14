@@ -1,8 +1,20 @@
+import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient, Role } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
 
+const prisma = new PrismaClient({ adapter });
+
+/** 
+ * @description
+ * Captura os valores de seed via .env, criptografa a senha recebida,
+ * atualiza ou cria um usuário com os valores informados.
+ * @note
+ * Por conta do upsert, é possível atualizar usuários, cuidado com o uso em staging e produção.
+ */
 async function main() {
   const email = process.env.ADMIN_SEED_EMAIL ?? 'admin@conecta.local';
   const password = process.env.ADMIN_SEED_PASSWORD ?? 'admin123';
