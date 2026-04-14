@@ -4,12 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, catchError, map, switchMap, tap, throwError } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import {
-  AuthError,
-  AuthUser,
-  LoginResponse,
-  UserRole,
-} from './auth.model';
+import { AuthError, AuthUser, LoginResponse } from './auth.model';
 
 const ACCESS_TOKEN_KEY = 'auth.access_token';
 const REFRESH_TOKEN_KEY = 'auth.refresh_token';
