@@ -48,10 +48,6 @@ export class PostsPage extends CrudPage<PostFormValues> {
 
   readonly posts = signal<Post[]>(MOCK_POSTS);
 
-  // Como o CrudPage da sua branch não tem editingId,
-  // criamos aqui dentro da própria página.
-  readonly editingId = signal<number | null>(null);
-
   readonly categories = [
     { value: 'evento', label: 'Evento' },
     { value: 'noticia', label: 'Notícia' },
