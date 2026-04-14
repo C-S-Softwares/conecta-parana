@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormField } from '../../shared/components/form-field';
 import { AuthService } from '../../core/services/auth.service';
+import { AuthError, AuthErrorKind } from '../../core/services/auth.model';
 
 @Component({
   selector: 'app-login-page',
@@ -21,6 +22,9 @@ export class LoginPage {
     password: ['', [Validators.required, Validators.minLength(8)]],
     rememberMe: [false],
   });
+
+  protected readonly errorMessage = signal<string | null>(null);
+  protected readonly loading = signal(false);
 
   get emailTouched(): boolean {
     return this.form.controls.email.touched;
@@ -50,11 +54,33 @@ export class LoginPage {
       return;
     }
 
-    const { email, rememberMe } = this.form.getRawValue();
+    const { email, password, rememberMe } = this.form.getRawValue();
+    this.errorMessage.set(null);
+    this.loading.set(true);
 
-    this.auth.login(email).subscribe((user) => {
-      if (rememberMe) this.auth.saveToken(user.token);
-      this.router.navigate(['/']);
+    this.auth.login(email, password, rememberMe).subscribe({
+      next: () => {
+        this.loading.set(false);
+        this.router.navigateByUrl('/posts');
+      },
+      error: (err: unknown) => {
+        this.loading.set(false);
+        this.errorMessage.set(this.messageFor(err));
+      },
     });
+  }
+
+  private messageFor(err: unknown): string {
+    const kind: AuthErrorKind = err instanceof AuthError ? err.kind : 'unknown';
+    switch (kind) {
+      case 'invalid_credentials':
+        return 'Credenciais inválidas.';
+      case 'server_unreachable':
+        return 'Servidor fora do ar. Tente novamente em instantes.';
+      case 'forbidden_role':
+        return 'Usuário sem permissão de administrador.';
+      default:
+        return 'Não foi possível entrar. Tente novamente.';
+    }
   }
 }

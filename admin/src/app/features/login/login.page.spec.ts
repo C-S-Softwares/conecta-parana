@@ -1,8 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { Router, RouterModule } from '@angular/router';
+import { of, throwError } from 'rxjs';
+
 import { LoginPage } from './login.page';
 import { AuthService } from '../../core/services/auth.service';
-import { of } from 'rxjs';
+import { AuthError } from '../../core/services/auth.model';
 
 describe('LoginPage', () => {
   let fixture: ComponentFixture<LoginPage>;
@@ -15,6 +19,7 @@ describe('LoginPage', () => {
 
     await TestBed.configureTestingModule({
       imports: [LoginPage, RouterModule.forRoot([])],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginPage);
@@ -70,6 +75,14 @@ describe('LoginPage', () => {
   });
 
   describe('onSubmit', () => {
+    const fillForm = (rememberMe = false) => {
+      component['form'].patchValue({
+        email: 'test@test.com',
+        password: '12345678',
+        rememberMe,
+      });
+    };
+
     it('deve marcar touched e não chamar auth se inválido', () => {
       const spy = vi.spyOn(authService, 'login');
       component.onSubmit();
@@ -78,34 +91,51 @@ describe('LoginPage', () => {
       expect(spy).not.toHaveBeenCalled();
     });
 
-    it('deve chamar auth.login com email e senha corretos', () => {
+    it('deve chamar auth.login com email, senha e rememberMe', () => {
       const spy = vi.spyOn(authService, 'login').mockReturnValue(
-        of({ id: 1, name: 'Admin', email: 'test@test.com', token: 'abc' })
+        of({ id: 1, name: 'Admin', email: 'test@test.com', role: 'ADMIN' as const }),
       );
+      const router = TestBed.inject(Router);
+      const navSpy = vi.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
 
-      component['form'].patchValue({
-        email: 'test@test.com',
-        password: '12345678',
-      });
+      fillForm(true);
       component.onSubmit();
 
-      expect(spy).toHaveBeenCalledWith('test@test.com');
+      expect(spy).toHaveBeenCalledWith('test@test.com', '12345678', true);
+      expect(navSpy).toHaveBeenCalledWith('/posts');
     });
 
-    it('deve salvar token quando rememberMe for true', () => {
-      const saveSpy = vi.spyOn(authService, 'saveToken');
+    it('deve exibir "Credenciais inválidas" quando o serviço falhar com invalid_credentials', () => {
       vi.spyOn(authService, 'login').mockReturnValue(
-        of({ id: 1, name: 'Admin', email: 'test@test.com', token: 'abc' })
+        throwError(() => new AuthError('invalid_credentials')),
       );
 
-      component['form'].patchValue({
-        email: 'test@test.com',
-        password: '12345678',
-        rememberMe: true,
-      });
+      fillForm();
       component.onSubmit();
 
-      expect(saveSpy).toHaveBeenCalledWith('abc');
+      expect(component['errorMessage']()).toBe('Credenciais inválidas.');
+    });
+
+    it('deve exibir mensagem de servidor fora do ar quando server_unreachable', () => {
+      vi.spyOn(authService, 'login').mockReturnValue(
+        throwError(() => new AuthError('server_unreachable')),
+      );
+
+      fillForm();
+      component.onSubmit();
+
+      expect(component['errorMessage']()).toBe('Servidor fora do ar. Tente novamente em instantes.');
+    });
+
+    it('deve exibir mensagem de permissão quando forbidden_role', () => {
+      vi.spyOn(authService, 'login').mockReturnValue(
+        throwError(() => new AuthError('forbidden_role')),
+      );
+
+      fillForm();
+      component.onSubmit();
+
+      expect(component['errorMessage']()).toBe('Usuário sem permissão de administrador.');
     });
   });
 });
