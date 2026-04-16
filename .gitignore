@@ -4,3 +4,4 @@
 
 # Intellij / Android Studio
 .idea/
+/generated/prisma
