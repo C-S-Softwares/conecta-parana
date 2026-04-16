@@ -3,6 +3,11 @@ import { Shell } from './core/layout/shell';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    loadChildren: () =>
+      import('./features/login/login.routes').then((m) => m.LOGIN_ROUTES),
+  },
+  {
     path: '',
     component: Shell,
     children: [
@@ -12,6 +17,23 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/news/news.routes').then((m) => m.NEWS_ROUTES),
       },
+      {
+      
+        path: 'notifications',
+        loadChildren: () =>
+          import('./features/notification/notification.routes').then((m) => m.NOTIFICATION_ROUTES),
+      },
+      {
+        path: 'events',
+        loadChildren: () =>
+          import('./features/events/events.routes').then((m) => m.EVENTS_ROUTES),
+      },
+      {
+        path: 'posts',
+        loadChildren: () =>
+          import('./features/posts/posts.routes').then((m) => m.POSTS_ROUTES),
+      }
     ],
   },
+  { path: '**', redirectTo: 'login' },
 ];
