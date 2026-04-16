@@ -60,11 +60,10 @@ export class SuperadminPage extends CrudPage<SuperadminForm> {
   
   readonly items = signal<AdministratorItem[]>(MOCK_ADMINISTRATORS);
   readonly deletingItem = signal<AdministratorItem | null>(null);
-  readonly editingId = signal<number | null>(null);
-
-  get isEditing(): boolean {
-  return this.editingId() !== null;
-}
+  
+  override get isEditing(): boolean {
+    return this.editingId() !== null;
+  }
   protected readonly form = this.fb.nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
@@ -81,17 +80,17 @@ export class SuperadminPage extends CrudPage<SuperadminForm> {
     };
   }
 
-override openForm(): void {
-  this.editingId.set(null);
-  this.form.reset(this.defaultFormValues());
-  super.openForm();
-}
+  override openForm(): void {
+    this.editingId.set(null);
+    this.form.reset(this.defaultFormValues());
+    super.openForm();
+  }
 
-override closeForm(): void {
-  this.editingId.set(null);
-  this.form.reset(this.defaultFormValues());
-  super.closeForm();
-}
+  override closeForm(): void {
+    this.editingId.set(null);
+    this.form.reset(this.defaultFormValues());
+    super.closeForm();
+  }
   get nameTouched(): boolean {
     return this.form.controls.name.touched;
   }
@@ -173,26 +172,23 @@ override closeForm(): void {
     }
 
     const raw = this.form.getRawValue();
-const currentEditingId = this.editingId();
+    const currentEditingId = this.editingId();
 
-if (currentEditingId !== null) {
-  const administratorId = Number(currentEditingId);
+    if (currentEditingId !== null) {
+      const administratorId = Number(currentEditingId);
 
-  this.api.update('administradores', administratorId, raw).subscribe(() => {
-    this.items.update((list) =>
-      list.map((administrator) =>
-        administrator.id === administratorId
-          ? { ...administrator, ...raw }
-          : administrator,
-      ),
-    );
-
-    this.closeForm();
-  });
-
-  return;
-}
-
+      this.api.update('administradores', administratorId, raw).subscribe(() => {
+        this.items.update((list) =>
+          list.map((administrator) =>
+            administrator.id === administratorId
+              ? { ...administrator, ...raw }
+            : administrator,
+            ),
+          );
+        this.closeForm();
+      });
+    return;
+    }
     this.api.create('administradores', raw).subscribe(() => {
       const newAdministrator: AdministratorItem = {
         id: Date.now(),
