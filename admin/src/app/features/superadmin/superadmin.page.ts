@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { of } from 'rxjs';
 import { CrudPage } from '../../shared/utils/crud-page';
 import { PageHeader } from '../../shared/components/page-header';
 import { FormContainer } from '../../shared/components/form-container';
