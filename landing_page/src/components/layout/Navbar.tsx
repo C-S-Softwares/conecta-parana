@@ -60,20 +60,25 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-brand-dark/98 backdrop-blur-[12px] border-t border-white/5 px-8 pb-6 flex flex-col gap-4">
+        <div
+          className="md:hidden backdrop-blur-[16px] border-t border-b border-white/15 px-6 py-2 flex flex-col"
+          style={{ background: 'oklch(17% 0.045 168 / 0.98)' }}
+        >
           {links.map(link => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-white/70 hover:text-white text-sm font-medium py-1 no-underline"
+              className="text-white/75 hover:text-white text-[0.95rem] font-medium py-4 border-b border-white/[0.12] last:border-b-0 no-underline transition-colors duration-150"
             >
               {link.label}
             </a>
           ))}
-          <Button as="a" href="#contact" size="sm" className="self-start mt-1">
-            Solicitar demo
-          </Button>
+          <div className="py-5">
+            <Button as="a" href="#contact" size="sm">
+              Solicitar demo
+            </Button>
+          </div>
         </div>
       )}
     </nav>
