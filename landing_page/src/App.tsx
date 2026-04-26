@@ -2,6 +2,7 @@ import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import Problema from './components/sections/Problema'
 import Overview from './components/sections/Overview'
+import Gov from './components/sections/Gov'
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
         <Hero />
         <Problema />
         <Overview />
+        <Gov />
       </main>
     </>
   )
