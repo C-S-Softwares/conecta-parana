@@ -5,6 +5,7 @@ import Overview from './components/sections/Overview'
 import Gov from './components/sections/Gov'
 import Citizen from './components/sections/Citizen'
 import Scale from './components/sections/Scale'
+import Stack from './components/sections/Stack'
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Gov />
         <Citizen />
         <Scale />
+        <Stack />
       </main>
     </>
   )
