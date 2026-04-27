@@ -21,7 +21,7 @@ export default function Footer() {
         </div>
 
         <p className="text-[0.8rem]" style={{ color: 'rgba(255,255,255,0.3)' }}>
-          © 2026 C&amp;S Softwares · contatogabemelo@gmail.com
+          © 2026 C&S Softwares · suporte@conectaparana.com.br
         </p>
 
         <nav className="flex gap-8">
