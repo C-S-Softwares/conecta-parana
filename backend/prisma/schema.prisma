@@ -73,7 +73,7 @@ model Event{
   description String
   type String
   status String
-  coordinates String
+  coordinates Unsupported("geometry(Point, 4326)")?
   eventDate DateTime @map("event_date")
 
   cityId Int @map("city_id")
@@ -88,6 +88,8 @@ model Event{
   likes Like[]
   favorites Favorite[]
   notifications Notification[]
+
+  @@index([coordinates], type: Gist)
 
   @@map("events")
 }
@@ -213,6 +215,8 @@ model Local {
 
   photos Photo[]
   events Event[]
+
+  @@index([coordinates], type: Gist)
 
   @@map("locals")
 }
