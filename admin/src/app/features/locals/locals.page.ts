@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject} from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { CrudPage } from '../../shared/utils/crud-page';
 import { PageHeader } from '../../shared/components/page-header';
@@ -32,9 +32,6 @@ export class LocalsPage extends CrudPage<LocalFormValues> {
     'Restaurante', 'Hotel', 'Ponto Turístico', 'Parque',
     'Shopping', 'Hospital', 'Escola', 'Igreja', 'Museu', 'Outro',
   ];
-
-  // ID do local sendo editado (null = criação)
-  protected editingId = signal<string | null>(null);
 
   protected readonly form = this.fb.nonNullable.group({
     name:        ['', Validators.required],
