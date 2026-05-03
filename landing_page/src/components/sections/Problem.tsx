@@ -24,12 +24,12 @@ const cards = [
 ]
 
 const stats = [
-  { value: '~30%', label: 'adoção digital média em\ncidades pequenas do PR' },
+  { value: '~15%', label: 'adoção digital média em\ncidades do PR' },
   { value: '399', label: 'municípios paranaenses, cada um\ncom seu canal fragmentado' },
   { value: '4+', label: 'portais web estaduais existentes\n(Paraná Interativo, parana.pr.gov.br…)\nmas nenhum app unificado de verdade' },
 ]
 
-export default function Problema() {
+export default function Problem() {
   return (
     <section id="problema" className="py-[100px] px-8 bg-neutral-100">
       <div className="max-w-[1200px] mx-auto">
@@ -41,7 +41,7 @@ export default function Problema() {
             </h2>
             <p className="text-[1.05rem] text-neutral-600 max-w-[540px] leading-[1.7] mb-8">
               Portais lentos, Instagram perdido no feed, mapas desatualizados. A informação pública
-              está espalhada — e cada município resolve sozinho.
+              está espalhada, e cada município resolve sozinho.
             </p>
             <div className="flex flex-col gap-4">
               {cards.map(card => (
