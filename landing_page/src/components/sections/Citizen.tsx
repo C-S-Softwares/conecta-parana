@@ -164,7 +164,7 @@ export default function Citizen() {
                   borderColor: 'oklch(50% 0.14 168 / 0.15)',
                 }}
               >
-                Em desenvolvimento
+                Em desenvolvimento (Design fictício)
               </span>
             </div>
           </div>
