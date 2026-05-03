@@ -15,7 +15,7 @@ permissions:
 jobs:
   deploy-admin:
     name: deploy-admin (production)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout

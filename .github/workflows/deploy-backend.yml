@@ -15,7 +15,7 @@ permissions:
 jobs:
   deploy-db:
     name: deploy-db (production)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout
@@ -60,7 +60,7 @@ jobs:
   deploy-backend:
     name: deploy-backend (production)
     needs: deploy-db
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout
