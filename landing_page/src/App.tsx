@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Hero from './components/sections/Hero'
-import Problema from './components/sections/Problema'
+import Problem from './components/sections/Problem'
 import Overview from './components/sections/Overview'
 import Gov from './components/sections/Gov'
 import Citizen from './components/sections/Citizen'
@@ -23,10 +23,10 @@ export default function App() {
 
   return (
     <>
-      <Navbar onOpenContact={() => setContactOpen(true)} />
+      <Navbar/>
       <main>
         <Hero />
-        <Problema />
+        <Problem />
         <Overview />
         <Gov />
         <Citizen />

@@ -11,8 +11,8 @@ const adminFeatures = [
 
 const citizenFeatures = [
   'Feed personalizado com notícias da cidade',
-  'Mapa de serviços públicos atualizado',
-  'Alertas e notificações push em tempo real',
+  'Mapa completo e atualizado',
+  'Alertas e notificações em tempo real',
   'Agenda de eventos locais',
   'Funciona offline, acessível em todos os dispositivos',
 ]

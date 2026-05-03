@@ -18,7 +18,7 @@ const features: Feature[] = [
   {
     icon: <FiMapPin size={18} />,
     title: 'Locais e serviços',
-    description: 'Mantenha atualizado o mapa de UBS, parques, escolas e pontos de serviço com geolocalização.',
+    description: 'Mantenha atualizado o mapa de UBS, CRAS, parques, escolas e pontos de serviço com geolocalização.',
   },
   {
     icon: <FiBell size={18} />,
@@ -28,7 +28,7 @@ const features: Feature[] = [
   {
     icon: <FiBarChart2 size={18} />,
     title: 'Dashboard consolidado',
-    description: 'Visualize alcance semanal, publicações no período, atividade recente e métricas de todas as cidades.',
+    description: 'Visualize o alcance, publicações no período, atividade recente e métricas de todas as cidades.',
   },
   {
     icon: <FiUsers size={18} />,
@@ -46,8 +46,8 @@ export default function Gov() {
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-extrabold tracking-[-0.03em] leading-[1.15] text-white mt-4 mb-4 text-balance">
             Um painel para gerenciar<br />toda a comunicação municipal.
           </h2>
-          <p className="text-[1.05rem] max-w-[540px] mx-auto leading-[1.7]" style={{ color: 'rgba(255,255,255,0.5)' }}>
-            Do comunicado ao alerta em massa. Do evento ao cadastro de locais. Tudo em um único
+          <p className="text-[1.05rem] max-w-[540px] mx-auto leading-[1.7]" style={{ color: 'rgba(255, 255, 255, 0.65)' }}>
+            Do comunicado ao alerta em massa. Da divulgação de eventos ao cadastro de locais. Tudo em um único
             painel web, com visibilidade consolidada de todas as cidades conectadas.
           </p>
         </div>
@@ -68,7 +68,7 @@ export default function Gov() {
                 {feat.icon}
               </div>
               <h4 className="text-[0.95rem] font-bold text-white mb-1.5">{feat.title}</h4>
-              <p className="text-[0.82rem] leading-relaxed" style={{ color: 'rgba(255,255,255,0.45)' }}>
+              <p className="text-[0.82rem] leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 {feat.description}
               </p>
             </div>

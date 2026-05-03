@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { FiMenu, FiX } from 'react-icons/fi'
 import Button from '../ui/Button'
 
-type Props = { onOpenContact: () => void }
-
 const links = [
   { label: 'Para Prefeituras', href: '#gov' },
   { label: 'Para Cidadãos', href: '#citizen' },
@@ -11,7 +9,7 @@ const links = [
   { label: 'Tecnologia', href: '#stack' },
 ]
 
-export default function Navbar({ onOpenContact }: Props) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -23,9 +21,8 @@ export default function Navbar({ onOpenContact }: Props) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 px-8 transition-all duration-300 ${
-        scrolled ? 'bg-brand-dark/95 backdrop-blur-[12px] shadow-[0_1px_0_rgba(255,255,255,0.06)]' : ''
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 px-8 py-2 transition-all duration-300 ${scrolled ? 'bg-brand-dark/95 backdrop-blur-[12px] shadow-[0_1px_0_rgba(255,255,255,0.06)]' : ''
+        }`}
     >
       <div className="max-w-[1200px] mx-auto flex items-center justify-between h-[68px]">
         <a href="#" className="flex items-center gap-[10px] no-underline">
@@ -47,9 +44,11 @@ export default function Navbar({ onOpenContact }: Props) {
               {link.label}
             </a>
           ))}
-          <Button size="sm" onClick={onOpenContact}>
-            Solicitar demo
-          </Button>
+          <a href="#contact">
+            <Button size="sm">
+              Solicitar demo
+            </Button>
+          </a>
         </div>
 
         <button
@@ -77,9 +76,11 @@ export default function Navbar({ onOpenContact }: Props) {
             </a>
           ))}
           <div className="py-5">
-            <Button size="sm" onClick={() => { setMenuOpen(false); onOpenContact() }}>
-              Solicitar demo
-            </Button>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              <Button size="sm">
+                Solicitar demo
+              </Button>
+            </a>
           </div>
         </div>
       )}

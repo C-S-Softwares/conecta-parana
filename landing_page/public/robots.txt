@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://conectaparana.com.br/sitemap.xml
