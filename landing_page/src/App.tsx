@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <>
-      <Navbar onOpenContact={() => setContactOpen(true)} />
+      <Navbar/>
       <main>
         <Hero />
         <Problem />
