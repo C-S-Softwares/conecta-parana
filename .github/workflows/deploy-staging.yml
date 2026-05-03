@@ -22,11 +22,14 @@ jobs:
   deploy-db:
     name: deploy-db (staging)
     if: ${{ inputs.target == 'backend' || inputs.target == 'todas' }}
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -63,11 +66,14 @@ jobs:
     name: deploy-backend (staging)
     if: ${{ inputs.target == 'backend' || inputs.target == 'todas' }}
     needs: deploy-db
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -104,11 +110,14 @@ jobs:
   deploy-admin:
     name: deploy-admin (staging)
     if: ${{ inputs.target == 'admin' || inputs.target == 'todas' }}
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
