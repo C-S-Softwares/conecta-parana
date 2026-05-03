@@ -32,7 +32,7 @@ export default function Hero() {
           style={{ background: 'oklch(50% 0.14 168 / 0.15)', borderColor: 'oklch(50% 0.14 168 / 0.3)' }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-brand-teal2 flex-shrink-0" />
-          Plataforma de informação pública · Paraná
+          Conecta Paraná · Plataforma de informação pública
         </div>
 
         <h1 className="text-[clamp(2.8rem,6vw,5.2rem)] font-extrabold text-white leading-[1.1] tracking-[-0.03em] max-w-[820px] mb-6 text-balance">
@@ -44,8 +44,8 @@ export default function Hero() {
         </h1>
 
         <p className="text-[clamp(1rem,2vw,1.2rem)] text-white/60 max-w-[650px] mb-10 leading-[1.7]">
-          Uma plataforma unificada para que prefeituras gerenciem e cidadãos
-          acessem comunicados, eventos, locais, alertas e muito mais. <br/> 
+          O <strong className="text-white/80 font-semibold">Conecta Paraná</strong> é a plataforma unificada para que prefeituras gerenciem e cidadãos
+          acessem comunicados, eventos, locais, alertas e muito mais. <br/>
           — de Maringá ao estado inteiro.
         </p>
 
