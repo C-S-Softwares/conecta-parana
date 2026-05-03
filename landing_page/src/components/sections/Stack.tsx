@@ -29,7 +29,7 @@ const cards = [
     items: [
       { name: 'NestJS 11', detail: 'TypeScript strict' },
       { name: 'Prisma 7 + PostgreSQL', detail: 'Geoespacial' },
-      { name: 'Redis · Oracle Cloud', detail: 'Cache + Object Storage' },
+      { name: 'Redis ', detail: 'Cache' },
     ],
   },
   {
@@ -37,9 +37,9 @@ const cards = [
     icon: <FiServer size={16} />,
     accentColor: 'var(--color-neutral-800)',
     items: [
-      { name: 'JWT Stateless · CORS controlado' },
+      { name: 'OCI · Object Storage' },
       { name: 'Caddy · ARM64 · QEMU' },
-      { name: 'GlitchTip · error tracking self-hosted' },
+      { name: 'GlitchTip' },
     ],
   },
   {

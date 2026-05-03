@@ -5,7 +5,7 @@ type Props = { onOpenContact: () => void }
 
 export default function CtaFinal({ onOpenContact }: Props) {
   return (
-    <section id="contact" className="py-[120px] px-8 bg-brand-dark text-center">
+    <section id="contact" className="py-[90px] px-8 bg-brand-dark text-center">
       <div className="max-w-[1200px] mx-auto">
         <h2 className="text-[clamp(2rem,4vw,3.2rem)] font-extrabold text-white tracking-[-0.03em] mb-4 text-balance">
           Leve o Conecta Paraná<br />para a sua cidade.
@@ -25,7 +25,7 @@ export default function CtaFinal({ onOpenContact }: Props) {
         </div>
 
         <p className="text-[0.78rem] mt-8" style={{ color: 'rgba(255,255,255,0.25)' }}>
-          Projeto independente em busca de parceria com o Governo do Estado do Paraná.
+          suporte@conectaparana.com.br
         </p>
       </div>
     </section>
