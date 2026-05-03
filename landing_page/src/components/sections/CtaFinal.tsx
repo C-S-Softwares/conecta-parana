@@ -24,8 +24,8 @@ export default function CtaFinal({ onOpenContact }: Props) {
           </Button>
         </div>
 
-        <p className="text-[0.78rem] mt-8" style={{ color: 'rgba(255,255,255,0.25)' }}>
-          suporte@conectaparana.com.br
+        <p className="text-[0.82rem] mt-8" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          Iniciativa independente conectando o Paraná. Estamos abertos a propostas e parcerias: suporte@conectaparana.com.br
         </p>
       </div>
     </section>
